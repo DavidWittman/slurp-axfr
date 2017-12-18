@@ -3,8 +3,9 @@ Slurp domains from [certstream](https://certstream.calidog.io) to find nameserve
 
 This project was created mostly by stapling code from [sonar](https://github.com/jrozner/sonar) and [slurp](https://github.com/bbb31/slurp) together, so they deserve all the credit here.
 
-## Usage
-- `slurp-axfr`
+## Installation and Usage
+ - `go get github.com/DavidWittman/slurp-axfr`
+ - `slurp-axfr` (or `$GOPATH/bin/slurp-axfr`)
 
 ## License
-- AGPLv3
+ - AGPLv3
