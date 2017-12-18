@@ -1,0 +1,17 @@
+package: .
+import:
+- package: github.com/CaliDog/certstream-go
+- package: github.com/Sirupsen/logrus
+  version: ^1.0.4
+- package: github.com/Workiva/go-datastructures
+  version: ^1.0.43
+  subpackages:
+  - queue
+- package: github.com/joeguo/tldextract
+- package: github.com/miekg/dns
+  version: ^1.0.0
+- package: github.com/spf13/cobra
+  version: ^0.0.1
+- package: golang.org/x/net
+  subpackages:
+  - idna
