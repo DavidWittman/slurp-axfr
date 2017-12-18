@@ -1,55 +1,20 @@
-hash: c755b8c3f736a61886fef7003787d36b5ec20c5a5763d600b47548fb4613ce82
-updated: 2017-12-17T19:30:11.754724468-06:00
+hash: e9e61db8a41a9f2e9c8352743d76696a35ff53815a93adfa9d8e49aa5d93ff84
+updated: 2017-12-17T19:48:06.320591821-06:00
 imports:
 - name: github.com/CaliDog/certstream-go
   version: 79eec0664246f1668ae85469616757084415b4cb
-- name: github.com/gorilla/websocket
-  version: cdedf21e585dae942951e34d6defc3215b4280fa
-- name: github.com/inconshreveable/mousetrap
-  version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
-- name: github.com/jmoiron/jsonq
-  version: e874b168d07ecc7808bc950a17998a8aa3141d82
 - name: github.com/joeguo/tldextract
   version: 98a8d4207a01c2990a1648bc2b2683f9725241cf
 - name: github.com/miekg/dns
   version: 9271f6595be6734763aaf4b7923f8f1b7a6cc559
-- name: github.com/pkg/errors
-  version: e881fd58d78e04cf6d0de1217f8707c8cc2249bc
 - name: github.com/Sirupsen/logrus
   version: d682213848ed68c0a260ca37d6dd5ace8423f5ba
-- name: github.com/spf13/cobra
-  version: 7b2c5ac9fc04fc5efafb60700713d4fa609b777b
-- name: github.com/spf13/pflag
-  version: 4c012f6dcd9546820e378d0bdda4d8fc772cdfea
 - name: github.com/Workiva/go-datastructures
   version: 9937fb49a4885795838b31eef9cc237820f0dcff
   subpackages:
   - queue
-- name: golang.org/x/crypto
-  version: 94eea52f7b742c7cbe0b03b22f0c4c8631ece122
-  subpackages:
-  - ed25519
-  - ed25519/internal/edwards25519
-  - ssh/terminal
 - name: golang.org/x/net
   version: d866cfc389cec985d6fda2859936a575a55a3ab6
   subpackages:
-  - bpf
   - idna
-  - internal/iana
-  - internal/socket
-  - ipv4
-  - ipv6
-- name: golang.org/x/sys
-  version: 571f7bbbe08da2a8955aed9d4db316e78630e9a3
-  subpackages:
-  - unix
-  - windows
-- name: golang.org/x/text
-  version: d5a9226ed7dd70cade6ccae9d37517fe14dd9fee
-  subpackages:
-  - secure/bidirule
-  - transform
-  - unicode/bidi
-  - unicode/norm
 testImports: []

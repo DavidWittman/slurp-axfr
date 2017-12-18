@@ -2,11 +2,8 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"strings"
 	"time"
-
-	"github.com/spf13/cobra"
 
 	"github.com/CaliDog/certstream-go"
 	"github.com/joeguo/tldextract"
@@ -35,60 +32,6 @@ type Domain struct {
 type PermutatedDomain struct {
 	Permutation string
 	Domain      Domain
-}
-
-var rootCmd = &cobra.Command{
-	Use:   "slurp",
-	Short: "slurp",
-	Long:  `slurp`,
-	Run: func(cmd *cobra.Command, args []string) {
-		action = "NADA"
-	},
-}
-
-var certstreamCmd = &cobra.Command{
-	Use:   "certstream",
-	Short: "Uses certstream to find s3 buckets in real-time",
-	Long:  "Uses certstream to find s3 buckets in real-time",
-	Run: func(cmd *cobra.Command, args []string) {
-		action = "CERTSTREAM"
-	},
-}
-
-var cfgDomain, cfgPermutationsFile string
-
-// PreInit initializes goroutine concurrency and initializes cobra
-func PreInit() {
-	helpCmd := rootCmd.HelpFunc()
-
-	var helpFlag bool
-
-	newHelpCmd := func(c *cobra.Command, args []string) {
-		helpFlag = true
-		helpCmd(c, args)
-	}
-	rootCmd.SetHelpFunc(newHelpCmd)
-
-	// certstreamCmd command help
-	helpCertstreamCmd := certstreamCmd.HelpFunc()
-	newCertstreamHelpCmd := func(c *cobra.Command, args []string) {
-		helpFlag = true
-		helpCertstreamCmd(c, args)
-	}
-	certstreamCmd.SetHelpFunc(newCertstreamHelpCmd)
-
-	// Add subcommands
-	rootCmd.AddCommand(certstreamCmd)
-
-	err := rootCmd.Execute()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if helpFlag {
-		os.Exit(0)
-	}
 }
 
 // StreamCerts takes input from certstream and stores it in the queue
@@ -239,37 +182,28 @@ func PrintJob() {
 }
 
 func main() {
-	PreInit()
+	log.Info("Initializing....")
+	Init()
 
-	switch action {
-	case "CERTSTREAM":
-		log.Info("Initializing....")
-		Init()
+	//go PrintJob()
 
-		//go PrintJob()
+	log.Info("Starting to stream certs....")
+	go StreamCerts()
 
-		log.Info("Starting to stream certs....")
-		go StreamCerts()
+	log.Info("Starting to process queue....")
+	go ProcessQueue()
 
-		log.Info("Starting to process queue....")
-		go ProcessQueue()
+	//log.Info("Starting to stream certs....")
+	go StoreInDB()
 
-		//log.Info("Starting to stream certs....")
-		go StoreInDB()
+	log.Info("Starting to process permutations....")
+	go CheckPermutations()
 
-		log.Info("Starting to process permutations....")
-		go CheckPermutations()
-
-		for {
-			if exit {
-				break
-			}
-
-			time.Sleep(1 * time.Second)
+	for {
+		if exit {
+			break
 		}
 
-	case "NADA":
-		log.Info("Check help")
-		os.Exit(0)
+		time.Sleep(1 * time.Second)
 	}
 }
